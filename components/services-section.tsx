@@ -123,15 +123,18 @@ export function ServicesSection() {
                 )}
                 
                 <Button 
-                  className={`w-full rounded-full ${
-                    service.popular 
-                      ? "bg-accent text-accent-foreground hover:bg-accent/90" 
-                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                  }`}
-                >
-                  Comenzar ahora
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+  onClick={() => {
+    document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
+  }}
+  className={`w-full rounded-full ${
+    service.popular 
+      ? "bg-accent text-accent-foreground hover:bg-accent/90" 
+      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+  }`}
+>
+  Comenzar ahora
+  <ArrowRight className="ml-2 h-4 w-4" />
+</Button>
               </CardContent>
             </Card>
           ))}
