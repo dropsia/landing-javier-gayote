@@ -1,51 +1,123 @@
-import { TrendingUp, TrendingDown } from "lucide-react"
+"use client"
 
-const metrics = [
-  { value: "+22%", label: "CTR", description: "Tasa de clics mejorada", positive: true },
-  { value: "+14%", label: "Conversión", description: "Más visitantes que compran", positive: true },
-  { value: "+27%", label: "ROAS", description: "Retorno de inversión publicitaria", positive: true },
-  { value: "-18%", label: "Gasto PPC", description: "Reducción en publicidad", positive: false },
+const resultsImages = [
+  {
+    src: "/results/result-1.jpg",
+    alt: "Captura real de cuenta ecommerce 1",
+    label: "Amazon FBA",
+  },
+  {
+    src: "/results/result-2.jpg",
+    alt: "Captura real de cuenta ecommerce 2",
+    label: "eBay",
+  },
+  {
+    src: "/results/result-3.jpg",
+    alt: "Captura real de cuenta ecommerce 3",
+    label: "PPC",
+  },
+  {
+    src: "/results/result-4.jpg",
+    alt: "Captura real de cuenta ecommerce 4",
+    label: "Optimización",
+  },
+  {
+    src: "/results/result-5.jpg",
+    alt: "Captura real de cuenta ecommerce 5",
+    label: "Escalado",
+  },
 ]
 
+const loopedImages = [...resultsImages, ...resultsImages]
+
 export function ResultsSection() {
+  const metrics = [
+    { value: "+150", label: "Clientes asesorados" },
+    { value: "+2M", label: "Ventas generadas" },
+    { value: "+10", label: "Años de experiencia en ecommerce" },
+    { value: "98%", label: "Satisfacción" },
+  ]
+
+  const performance = [
+    { value: "+22%", label: "Mejora en CTR" },
+    { value: "+14%", label: "Mejora en conversión" },
+    { value: "+27%", label: "Mejora en ROAS" },
+    { value: "-18%", label: "Reducción de gasto PPC ineficiente" },
+  ]
+
   return (
-    <section className="py-24 px-4 bg-card border-t border-border">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-sm font-medium text-accent uppercase tracking-wider">Resultados</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mt-4 text-balance">
-            Métricas que hablan por sí solas
+    <section className="border-t border-border px-4 py-24">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-16 text-center">
+          <span className="text-sm font-medium uppercase tracking-wider text-accent">
+            Resultados
+          </span>
+          <h2 className="mt-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
+            Datos, métricas y resultados reales
           </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Resultados promedio obtenidos por nuestros clientes después de implementar nuestras estrategias
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            Trabajo con estructura, optimización y decisiones basadas en datos para generar mejoras reales en cuentas y operaciones ecommerce.
           </p>
         </div>
-        
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {metrics.map((metric, i) => (
-            <div 
-              key={i}
-              className="relative group p-8 rounded-2xl bg-background border border-border hover:border-accent/30 transition-all duration-300 text-center"
+
+        <div className="grid gap-6 md:grid-cols-4">
+          {metrics.map((item, index) => (
+            <div
+              key={index}
+              className="rounded-2xl border border-border bg-card p-6 text-center"
             >
-              <div className="absolute top-4 right-4">
-                {metric.positive ? (
-                  <TrendingUp className="h-5 w-5 text-accent" />
-                ) : (
-                  <TrendingDown className="h-5 w-5 text-accent" />
-                )}
-              </div>
-              
-              <div className="text-4xl sm:text-5xl font-bold text-accent mb-2">
-                {metric.value}
-              </div>
-              <div className="text-lg font-semibold text-foreground mb-1">
-                {metric.label}
-              </div>
-              <p className="text-sm text-muted-foreground">
-                {metric.description}
-              </p>
+              <div className="text-3xl font-bold text-foreground">{item.value}</div>
+              <div className="mt-2 text-sm text-muted-foreground">{item.label}</div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-4">
+          {performance.map((item, index) => (
+            <div
+              key={index}
+              className="rounded-2xl border border-border bg-card p-6 text-center"
+            >
+              <div className="text-3xl font-bold text-foreground">{item.value}</div>
+              <div className="mt-2 text-sm text-muted-foreground">{item.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16">
+          <div className="mb-8 text-center">
+            <h3 className="text-2xl font-bold text-foreground">
+              Capturas reales de cuentas trabajadas
+            </h3>
+            <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base">
+              Sin exponer identidades ni información sensible. Solo resultados, operación y métricas reales.
+            </p>
+          </div>
+
+          <div className="relative overflow-hidden">
+            <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-background to-transparent" />
+            <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-background to-transparent" />
+
+            <div className="results-marquee flex gap-5">
+              {loopedImages.map((item, index) => (
+                <div
+                  key={`${item.src}-${index}`}
+                  className="relative w-[280px] flex-shrink-0 overflow-hidden rounded-2xl border border-border bg-card shadow-md sm:w-[380px]"
+                >
+                  <div className="absolute left-3 top-3 z-10 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    {item.label}
+                  </div>
+
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className="h-auto w-full object-cover"
+                    draggable={false}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
