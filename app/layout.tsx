@@ -11,22 +11,9 @@ export const metadata: Metadata = {
   description: 'Escala tu negocio en Amazon FBA o eBay Dropshipping con estrategia, datos e IA aplicada. Mentoría, gestión y soluciones llave en mano.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
+   icons: {
+  icon: "/favicon.png",
+},
 }
 
 export default function RootLayout({
