@@ -12,13 +12,27 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      <HeroSection />
-      <ProblemSection />
-      <SolutionSection />
-      <ServicesSection />
-      <ResultsSection />
-      <ProcessSection />
-      <CtaSection />
+      <section id="inicio">
+        <HeroSection />
+      </section>
+      <section id="problema">
+        <ProblemSection />
+      </section>
+      <section id="solucion">
+        <SolutionSection />
+      </section>
+      <section id="servicios">
+        <ServicesSection />
+      </section>
+      <section id="resultados">
+        <ResultsSection />
+      </section>
+      <section id="proceso">
+        <ProcessSection />
+      </section>
+      <section id="contactar">
+        <CtaSection />
+      </section>
       <Footer />
     </main>
   )
