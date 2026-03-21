@@ -2,6 +2,7 @@ import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
 import { ProblemSection } from "@/components/problem-section"
 import { SolutionSection } from "@/components/solution-section"
+import { ServicesSection } from "@/components/services-section"
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
       <HeroSection />
       <ProblemSection />
       <SolutionSection />
+      <ServicesSection />
     </main>
   )
 }
