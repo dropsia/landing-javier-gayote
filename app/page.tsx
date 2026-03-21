@@ -6,6 +6,7 @@ import { ServicesSection } from "@/components/services-section"
 import { ResultsSection } from "@/components/results-section"
 import { ProcessSection } from "@/components/process-section"
 import { CtaSection } from "@/components/cta-section"
+import { Footer } from "@/components/footer"
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
       <ResultsSection />
       <ProcessSection />
       <CtaSection />
+      <Footer />
     </main>
   )
 }
