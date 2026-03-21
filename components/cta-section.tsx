@@ -56,7 +56,7 @@ export function CtaSection() {
             size="lg"
             className="bg-accent text-accent-foreground hover:bg-accent/90 px-10 py-7 text-lg font-medium rounded-full"
           >
-            Hablar por WhatsApp
+            Escribime por WhatsApp
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </a>
