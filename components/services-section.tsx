@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { GraduationCap, Store, Rocket, Check, ArrowRight, Wrench } from "lucide-react"
 
 const services = [
@@ -71,6 +70,11 @@ export function ServicesSection() {
     window.dispatchEvent(new Event("serviceSelected"))
   }
 
+  const handleSelectAndScroll = (serviceId: string, serviceTitle: string) => {
+    handleSelect(serviceId, serviceTitle)
+    document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <section id="servicios" className="py-24 px-4 border-t border-border">
       <div className="max-w-6xl mx-auto">
@@ -98,7 +102,7 @@ export function ServicesSection() {
                 }`}
               >
                 {service.popular && !isSelected && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2">
                     <span className="px-3 py-1 text-xs font-medium bg-accent text-accent-foreground rounded-full">
                       Más popular
                     </span>
@@ -106,7 +110,7 @@ export function ServicesSection() {
                 )}
 
                 {isSelected && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2">
                     <span className="px-3 py-1 text-xs font-medium bg-blue-600 text-white rounded-full">
                       Seleccionado
                     </span>
@@ -152,48 +156,36 @@ export function ServicesSection() {
                     </div>
                   )}
 
-<div className="relative z-10 flex flex-col gap-3">
-  <button
-    type="button"
-    onClick={() => handleSelect(service.id, service.title)}
-    onTouchEnd={(e) => {
-      e.preventDefault()
-      handleSelect(service.id, service.title)
-    }}
-    className={`w-full rounded-full border px-4 py-3 text-sm font-medium touch-manipulation ${
-      isSelected
-        ? "border-blue-600 text-blue-600 bg-white"
-        : "border-border bg-white text-foreground"
-    }`}
-  >
-    {isSelected ? "Servicio seleccionado" : "Seleccionar servicio"}
-  </button>
+                  <div className="relative z-10 flex flex-col gap-3">
+                    <button
+                      type="button"
+                      onPointerUp={() => handleSelect(service.id, service.title)}
+                      className={`w-full rounded-full border px-4 py-3 text-sm font-medium touch-manipulation ${
+                        isSelected
+                          ? "border-blue-600 text-blue-600 bg-white"
+                          : "border-border bg-white text-foreground"
+                      }`}
+                    >
+                      {isSelected ? "Servicio seleccionado" : "Seleccionar servicio"}
+                    </button>
 
-  <button
-    type="button"
-    onClick={() => {
-      handleSelect(service.id, service.title)
-      document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
-    }}
-    onTouchEnd={(e) => {
-      e.preventDefault()
-      handleSelect(service.id, service.title)
-      document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
-    }}
-    className={`w-full rounded-full px-4 py-3 text-sm font-medium touch-manipulation ${
-      isSelected
-        ? "bg-blue-600 text-white"
-        : service.popular
-          ? "bg-accent text-accent-foreground"
-          : "bg-secondary text-secondary-foreground"
-    }`}
-  >
-    <span className="inline-flex items-center justify-center">
-      Escribirme por WhatsApp
-      <ArrowRight className="ml-2 h-4 w-4" />
-    </span>
-  </button>
-</div>
+                    <button
+                      type="button"
+                      onPointerUp={() => handleSelectAndScroll(service.id, service.title)}
+                      className={`w-full rounded-full px-4 py-3 text-sm font-medium touch-manipulation ${
+                        isSelected
+                          ? "bg-blue-600 text-white"
+                          : service.popular
+                            ? "bg-accent text-accent-foreground"
+                            : "bg-secondary text-secondary-foreground"
+                      }`}
+                    >
+                      <span className="inline-flex items-center justify-center">
+                        Escribirme por WhatsApp
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </span>
+                    </button>
+                  </div>
                 </CardContent>
               </Card>
             )
@@ -209,7 +201,7 @@ export function ServicesSection() {
             }`}
           >
             {selectedService === "medida" && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+              <div className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="px-3 py-1 text-xs font-medium bg-blue-600 text-white rounded-full">
                   Seleccionado
                 </span>
@@ -245,34 +237,34 @@ export function ServicesSection() {
                 ))}
               </ul>
 
-             <div className="flex flex-col gap-3 max-w-md mx-auto">
-  <Button
-    type="button"
-    onClick={() => handleSelect("medida", "Servicio a medida")}
-    variant="outline"
-    className={`w-full rounded-full ${
-      selectedService === "medida" ? "border-blue-600 text-blue-600" : ""
-    }`}
-  >
-    {selectedService === "medida" ? "Servicio seleccionado" : "Seleccionar servicio"}
-  </Button>
+              <div className="relative z-10 flex flex-col gap-3 max-w-md mx-auto">
+                <button
+                  type="button"
+                  onPointerUp={() => handleSelect("medida", "Servicio a medida")}
+                  className={`w-full rounded-full border px-4 py-3 text-sm font-medium touch-manipulation ${
+                    selectedService === "medida"
+                      ? "border-blue-600 text-blue-600 bg-white"
+                      : "border-border bg-white text-foreground"
+                  }`}
+                >
+                  {selectedService === "medida" ? "Servicio seleccionado" : "Seleccionar servicio"}
+                </button>
 
-  <Button
-    type="button"
-    onClick={() => {
-      handleSelect("medida", "Servicio a medida")
-      document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
-    }}
-    className={`w-full rounded-full ${
-      selectedService === "medida"
-        ? "bg-blue-600 text-white hover:bg-blue-700"
-        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-    }`}
-  >
-    Escribirme por WhatsApp
-    <ArrowRight className="ml-2 h-4 w-4" />
-  </Button>
-</div>
+                <button
+                  type="button"
+                  onPointerUp={() => handleSelectAndScroll("medida", "Servicio a medida")}
+                  className={`w-full rounded-full px-4 py-3 text-sm font-medium touch-manipulation ${
+                    selectedService === "medida"
+                      ? "bg-blue-600 text-white"
+                      : "bg-secondary text-secondary-foreground"
+                  }`}
+                >
+                  <span className="inline-flex items-center justify-center">
+                    Escribirme por WhatsApp
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </span>
+                </button>
+              </div>
             </CardContent>
           </Card>
         </div>
