@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { GraduationCap, Store, Rocket, Check, ArrowRight, Wrench } from "lucide-react"
 
@@ -65,6 +66,8 @@ const services = [
 ]
 
 export function ServicesSection() {
+  const [selectedService, setSelectedService] = useState<string | null>(null)
+
   return (
     <section id="servicios" className="py-24 px-4 border-t border-border">
       <div className="max-w-6xl mx-auto">
@@ -79,13 +82,21 @@ export function ServicesSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {services.map((service) => (
-            <Card
-              key={service.id}
-              className={`relative bg-card transition-all duration-300 border-border hover:border-accent/30 ${
-                service.popular ? "ring-1 ring-accent/20 border-accent" : ""
-              }`}
-            >
+        {services.map((service) => {
+  const isSelected = selectedService === service.id
+
+  return (
+    <Card
+      key={service.id}
+      onClick={() => setSelectedService(service.id)}
+      className={`relative bg-card transition-all duration-300 border cursor-pointer ${
+        isSelected
+          ? "border-blue-500 ring-2 ring-blue-500/20"
+          : service.popular
+          ? "ring-1 ring-accent/20 border-accent hover:border-accent"
+          : "border-border hover:border-accent/30"
+      }`}
+    >
               {service.popular && (
                 <div className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2">
                   <span className="px-3 py-1 text-xs font-medium bg-accent text-accent-foreground rounded-full">
@@ -116,7 +127,8 @@ export function ServicesSection() {
                       <Check className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-muted-foreground">{feature}</span>
                     </li>
-                  ))}
+                    )
+})}
                 </ul>
 
                 {service.bonuses && (
