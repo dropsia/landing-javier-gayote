@@ -1,35 +1,25 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export function Navbar() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <img 
-            src="/images/logo.png" 
-            alt="Javier Gayote Logo" 
-            className="h-6 w-auto"
-          />
-          <span className="text-lg font-semibold text-foreground">Javier Gayote</span>
-        </a>
-        
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#servicios" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+    <header className="sticky top-0 z-50 bg-white border-b">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <div className="text-lg font-semibold">Javier Gayote</div>
+
+        <nav className="hidden md:flex items-center gap-6">
+          <Link href="#servicios" className="text-sm text-gray-700 hover:text-gray-900">
             Servicios
-          </a>
-          <a href="#resultados" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          </Link>
+          <Link href="#resultados" className="text-sm text-gray-700 hover:text-gray-900">
             Resultados
-          </a>
-          <a href="#proceso" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+          </Link>
+          <Link href="#proceso" className="text-sm text-gray-700 hover:text-gray-900">
             Proceso
-          </a>
+          </Link>
+          <Link href="#contactar" className="text-sm text-gray-700 hover:text-gray-900">
+            Contactar
+          </Link>
         </nav>
-        
-        <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-          Contactar
-        </Button>
       </div>
     </header>
   )
