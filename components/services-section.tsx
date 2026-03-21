@@ -1,3 +1,5 @@
+"use client"
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { GraduationCap, Store, Rocket, Check, ArrowRight } from "lucide-react"
@@ -66,10 +68,10 @@ export function ServicesSection() {
             Elige el plan que mejor se adapte a ti
           </h2>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, i) => (
-            <Card 
+            <Card
               key={i}
               className={`relative bg-card border-border hover:border-accent/30 transition-all duration-300 ${
                 service.popular ? "border-accent ring-1 ring-accent/20" : ""
@@ -82,7 +84,7 @@ export function ServicesSection() {
                   </span>
                 </div>
               )}
-              
+
               <CardHeader className="pb-4">
                 <div className="p-3 rounded-xl bg-secondary w-fit mb-4">
                   <service.icon className="h-6 w-6 text-accent" />
@@ -93,12 +95,12 @@ export function ServicesSection() {
                 )}
                 <p className="text-muted-foreground text-sm mt-2">{service.description}</p>
               </CardHeader>
-              
+
               <CardContent>
                 <div className="mb-6">
                   <span className="text-3xl font-bold text-foreground">{service.price}</span>
                 </div>
-                
+
                 <ul className="space-y-3 mb-6">
                   {service.features.map((feature, j) => (
                     <li key={j} className="flex items-start gap-3">
@@ -107,12 +109,12 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
-                
+
                 {service.bonuses && (
                   <div className="mb-6 pt-4 border-t border-border">
                     <p className="text-xs font-semibold text-foreground mb-3">Bonos incluidos:</p>
                     <ul className="space-y-2">
-                      {service.bonuses.map((bonus: { plan: string; content: string }, j: number) => (
+                      {service.bonuses.map((bonus, j) => (
                         <li key={j} className="text-xs text-muted-foreground">
                           <span className="font-medium text-foreground">{bonus.plan}:</span>{" "}
                           {bonus.content}
@@ -121,20 +123,20 @@ export function ServicesSection() {
                     </ul>
                   </div>
                 )}
-                
-                <Button 
-  onClick={() => {
-    document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
-  }}
-  className={`w-full rounded-full ${
-    service.popular 
-      ? "bg-accent text-accent-foreground hover:bg-accent/90" 
-      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-  }`}
->
-  Comenzar ahora
-  <ArrowRight className="ml-2 h-4 w-4" />
-</Button>
+
+                <Button
+                  onClick={() => {
+                    document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                  className={`w-full rounded-full ${
+                    service.popular
+                      ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  Comenzar ahora
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
               </CardContent>
             </Card>
           ))}
