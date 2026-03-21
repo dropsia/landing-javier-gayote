@@ -1,53 +1,70 @@
 "use client"
 
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, MessageCircle } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20 overflow-hidden">
+    <section
+      id="inicio"
+      className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20 overflow-hidden"
+    >
       {/* Subtle grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:64px_64px]" />
-      
+
       {/* Gradient orb */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
-      
+
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm mb-8">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           <span className="text-sm text-muted-foreground">Consultoría Ecommerce & IA</span>
         </div>
-        
+
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] text-balance mb-6">
-          Escala tu negocio en{" "}
-          <span className="text-accent">Amazon FBA</span> o{" "}
-          <span className="text-accent">eBay Dropshipping</span>{" "}
-          con estrategia, datos e IA aplicada
+          Escala tu negocio en <span className="text-accent">Amazon FBA</span> o{" "}
+          <span className="text-accent">eBay Dropshipping</span> con estrategia, datos e IA aplicada
         </h1>
-        
+
         <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 leading-relaxed text-pretty">
-          Te ayudo a lanzar, optimizar o escalar tu ecommerce con un enfoque práctico: más ventas, mejor rentabilidad y una operación estructurada.
+          Te ayudo a lanzar, optimizar o escalar tu ecommerce con un enfoque práctico: más ventas,
+          mejor rentabilidad y una operación estructurada.
         </p>
-        
+
         <p className="text-base font-medium text-foreground mb-10">
           Javier Gayote | Amazon FBA, eBay Dropshipping & IA Aplicada
         </p>
-        
+
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-medium rounded-full shadow-lg shadow-primary/25">
-            Agenda un diagnóstico estratégico
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Button
+            asChild
+            size="lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-medium rounded-full shadow-lg shadow-primary/25"
+          >
+            <Link href="#contactar">
+              Agenda un diagnóstico estratégico
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
           </Button>
-          <Button 
-            variant="outline" 
-            size="lg" 
+
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
             className="border-border text-foreground hover:bg-secondary px-8 py-6 text-base font-medium rounded-full"
           >
-            <MessageCircle className="mr-2 h-5 w-5" />
-            Hablar por WhatsApp
+            <a
+              href="https://wa.me/5493434653628?text=Hola%20Javier,%20quiero%20informaci%C3%B3n%20sobre%20tus%20servicios"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MessageCircle className="mr-2 h-5 w-5" />
+              Hablar por WhatsApp
+            </a>
           </Button>
         </div>
-        
+
         {/* Stats */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           {[
