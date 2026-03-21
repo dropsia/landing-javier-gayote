@@ -65,6 +65,12 @@ const services = [
 export function ServicesSection() {
   const [selectedService, setSelectedService] = useState("mentoria")
 
+  const handleSelect = (serviceId: string, serviceTitle: string) => {
+    setSelectedService(serviceId)
+    localStorage.setItem("selectedService", serviceTitle)
+    window.dispatchEvent(new Event("serviceSelected"))
+  }
+
   return (
     <section id="servicios" className="py-24 px-4 border-t border-border">
       <div className="max-w-6xl mx-auto">
@@ -74,7 +80,7 @@ export function ServicesSection() {
             Elige el plan que mejor se adapte a ti
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Haz click en un servicio para seleccionarlo antes de agendar.
+            Haz click en un servicio para seleccionarlo antes de escribir.
           </p>
         </div>
 
@@ -85,10 +91,8 @@ export function ServicesSection() {
             return (
               <Card
                 key={service.id}
-onClick={() => {
-  setSelectedService(service.id)
-  localStorage.setItem("selectedService", service.title)
-}}                className={`relative cursor-pointer bg-card transition-all duration-300 ${
+                onClick={() => handleSelect(service.id, service.title)}
+                className={`relative cursor-pointer bg-card transition-all duration-300 ${
                   isSelected
                     ? "border-accent ring-2 ring-accent/30 shadow-lg shadow-accent/10"
                     : "border-border hover:border-accent/30"
@@ -149,20 +153,23 @@ onClick={() => {
                     </div>
                   )}
 
-                  <a href="#contactar" onClick={(e) => e.stopPropagation()}>
-                    <Button
-                      className={`w-full rounded-full ${
-                        isSelected
-                          ? "bg-blue-600 text-white hover:bg-blue-700"
-                          : service.popular
-                            ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                            : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                      }`}
-                    >
-                      Agendar llamada
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
+                  <Button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleSelect(service.id, service.title)
+                      document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
+                    }}
+                    className={`w-full rounded-full ${
+                      isSelected
+                        ? "bg-blue-600 text-white hover:bg-blue-700"
+                        : service.popular
+                          ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                          : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    }`}
+                  >
+                    Escribir por WhatsApp
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
                 </CardContent>
               </Card>
             )
