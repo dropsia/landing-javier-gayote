@@ -10,7 +10,8 @@ const services = [
     icon: GraduationCap,
     title: "Mentoría Ecommerce Pro",
     price: "USD 500 / USD 1000",
-    description: "Formación personalizada para Amazon FBA o eBay Dropshipping, según la plataforma que elijas.",
+    description:
+      "Formación personalizada para Amazon FBA o eBay Dropshipping, según la plataforma que elijas.",
     subtitle: "La mayoría comienza aquí",
     features: [
       "Amazon FBA o eBay Dropshipping",
@@ -21,7 +22,10 @@ const services = [
     popular: true,
     bonuses: [
       { plan: "Plan Base (USD 500)", content: "Curso completo de la plataforma elegida" },
-      { plan: "Plan Intensivo (USD 1000)", content: "Más acompañamiento + curso completo de la plataforma elegida" },
+      {
+        plan: "Plan Intensivo (USD 1000)",
+        content: "Más acompañamiento + curso completo de la plataforma elegida",
+      },
     ],
     whatsappMessage:
       "Hola Javier, vi tu página y quiero que me expliques cómo trabajar mi caso con Mentoría Ecommerce Pro.",
@@ -31,7 +35,8 @@ const services = [
     icon: Store,
     title: "Gestión eBay Dropshipping",
     price: "USD 2500",
-    description: "Delegación completa de la operación con foco en métricas, estabilidad y crecimiento sano de la cuenta.",
+    description:
+      "Delegación completa de la operación con foco en métricas, estabilidad y crecimiento sano de la cuenta.",
     subtitle: null,
     features: [
       "Listings optimizados",
@@ -50,7 +55,8 @@ const services = [
     icon: Rocket,
     title: "Amazon FBA Llave en Mano",
     price: "USD 5000",
-    description: "Desarrollo completo del producto desde cero, con estructura real para vender y escalar.",
+    description:
+      "Desarrollo completo del producto desde cero, con estructura real para vender y escalar.",
     subtitle: null,
     features: [
       "Producto rentable validado",
@@ -69,6 +75,10 @@ const services = [
 
 export function ServicesSection() {
   const [selectedService, setSelectedService] = useState<string>("mentoria")
+
+  const selectService = (id: string) => {
+    setSelectedService(id)
+  }
 
   const getCardClasses = (id: string, popular?: boolean) => {
     const isSelected = selectedService === id
@@ -94,11 +104,19 @@ export function ServicesSection() {
     return "bg-secondary text-secondary-foreground hover:bg-secondary/80"
   }
 
+  const getTopAreaClasses = (isSelected: boolean) => {
+    return `block w-full rounded-t-2xl text-left select-none ${
+      isSelected ? "bg-accent/5" : ""
+    }`
+  }
+
   return (
     <section id="servicios" className="py-24 px-4 border-t border-border">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-sm font-medium text-accent uppercase tracking-wider">Servicios</span>
+          <span className="text-sm font-medium text-accent uppercase tracking-wider">
+            Servicios
+          </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mt-4 text-balance">
             Elegí el servicio que mejor se adapte a tu momento
           </h2>
@@ -114,7 +132,7 @@ export function ServicesSection() {
             return (
               <Card
                 key={service.id}
-                className={`relative bg-card transition-all duration-300 ease-out ${getCardClasses(
+                className={`relative bg-card transition-all duration-300 ease-out overflow-hidden ${getCardClasses(
                   service.id,
                   service.popular
                 )}`}
@@ -127,14 +145,34 @@ export function ServicesSection() {
                   </div>
                 )}
 
-                <button
-                  type="button"
-                  onClick={() => setSelectedService(service.id)}
-                  className="block w-full text-left rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+                <div
+                  role="button"
+                  tabIndex={0}
                   aria-pressed={isSelected}
+                  onClick={() => selectService(service.id)}
+                  onPointerUp={(e) => {
+                    if (e.pointerType === "touch") {
+                      selectService(service.id)
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault()
+                      selectService(service.id)
+                    }
+                  }}
+                  className={getTopAreaClasses(isSelected)}
+                  style={{
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
+                  }}
                 >
                   <CardHeader className="pb-4">
-                    <div className="p-3 rounded-xl bg-secondary w-fit mb-4 transition-transform duration-300 group-hover:scale-105">
+                    <div
+                      className={`p-3 rounded-xl w-fit mb-4 transition-all duration-300 ${
+                        isSelected ? "bg-accent/10 scale-105" : "bg-secondary"
+                      }`}
+                    >
                       <service.icon className="h-6 w-6 text-accent" />
                     </div>
 
@@ -163,7 +201,9 @@ export function ServicesSection() {
 
                     {service.bonuses && (
                       <div className="mb-2 pt-4 border-t border-border">
-                        <p className="text-xs font-semibold text-foreground mb-3">Bonos incluidos:</p>
+                        <p className="text-xs font-semibold text-foreground mb-3">
+                          Bonos incluidos:
+                        </p>
                         <ul className="space-y-2">
                           {service.bonuses.map((bonus, j) => (
                             <li key={j} className="text-xs text-muted-foreground">
@@ -175,14 +215,18 @@ export function ServicesSection() {
                       </div>
                     )}
                   </CardContent>
-                </button>
+                </div>
 
                 <div className="px-6 pb-6">
                   <a
-                    href={`https://wa.me/5493434653628?text=${encodeURIComponent(service.whatsappMessage)}`}
+                    href={`https://wa.me/5493434653628?text=${encodeURIComponent(
+                      service.whatsappMessage
+                    )}`}
                     target="_blank"
                     rel="noreferrer"
                     onClick={(e) => e.stopPropagation()}
+                    onPointerUp={(e) => e.stopPropagation()}
+                    onTouchEnd={(e) => e.stopPropagation()}
                     className={`inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-medium transition-all duration-300 ${getButtonClasses(
                       service.id,
                       service.popular
@@ -199,32 +243,55 @@ export function ServicesSection() {
 
         <div className="mt-10 max-w-3xl mx-auto">
           <Card
-            className={`relative bg-card transition-all duration-300 ease-out ${getCardClasses(
+            className={`relative bg-card transition-all duration-300 ease-out overflow-hidden ${getCardClasses(
               "custom",
               false
             )}`}
           >
-            <button
-              type="button"
-              onClick={() => setSelectedService("custom")}
-              className="block w-full text-left rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+            <div
+              role="button"
+              tabIndex={0}
               aria-pressed={selectedService === "custom"}
+              onClick={() => selectService("custom")}
+              onPointerUp={(e) => {
+                if (e.pointerType === "touch") {
+                  selectService("custom")
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  selectService("custom")
+                }
+              }}
+              className={getTopAreaClasses(selectedService === "custom")}
+              style={{
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "manipulation",
+              }}
             >
               <CardHeader className="pb-4 text-center">
-                <div className="p-3 rounded-xl bg-secondary w-fit mb-4 mx-auto">
+                <div
+                  className={`p-3 rounded-xl w-fit mb-4 mx-auto transition-all duration-300 ${
+                    selectedService === "custom" ? "bg-accent/10 scale-105" : "bg-secondary"
+                  }`}
+                >
                   <Wrench className="h-6 w-6 text-accent" />
                 </div>
 
                 <h3 className="text-xl font-bold text-foreground">Servicio a medida</h3>
 
                 <p className="text-muted-foreground text-sm mt-2">
-                  Para auditorías, desbloqueos, revisión de PPC, optimización de listings o necesidades específicas.
+                  Para auditorías, desbloqueos, revisión de PPC, optimización de listings o
+                  necesidades específicas.
                 </p>
               </CardHeader>
 
               <CardContent className="text-center pb-4">
                 <div className="mb-6">
-                  <span className="text-3xl font-bold text-foreground">Cotización personalizada</span>
+                  <span className="text-3xl font-bold text-foreground">
+                    Cotización personalizada
+                  </span>
                 </div>
 
                 <ul className="space-y-3 mb-2 text-left max-w-md mx-auto">
@@ -241,7 +308,7 @@ export function ServicesSection() {
                   ))}
                 </ul>
               </CardContent>
-            </button>
+            </div>
 
             <div className="px-6 pb-6 text-center">
               <a
@@ -251,6 +318,8 @@ export function ServicesSection() {
                 target="_blank"
                 rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
+                onPointerUp={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
                 className={`inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium transition-all duration-300 ${getButtonClasses(
                   "custom",
                   false
