@@ -35,7 +35,7 @@ export function CtaSection() {
           </p>
         )}
 
-        <a href="https://wa.me/5493434653628?text=Hola%20Javier,%20quiero%20agendar%20una%20llamada%20para%20el%20servicio:%20${selectedService}">
+        <a href={`https://wa.me/5493434653628?text=Hola%20Javier,%20quiero%20agendar%20una%20llamada%20para%20el%20servicio:%20${selectedService}`}>
           <Button
             size="lg"
             className="bg-accent text-accent-foreground hover:bg-accent/90 px-10 py-7 text-lg font-medium rounded-full"
