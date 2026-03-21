@@ -23,7 +23,7 @@ export function CtaSection() {
 
   const message = useMemo(() => {
     const serviceText = selectedService || "el servicio que mejor se adapte a mi negocio"
-    return encodeURIComponent(`Hola Javier, quiero información sobre ${serviceText}.`)
+    return encodeURIComponent(`Hola Javier, vi tu página y quiero que me expliques cómo trabajar mi caso con ${serviceText}.`)
   }, [selectedService])
 
   return (
