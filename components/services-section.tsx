@@ -150,11 +150,11 @@ export function ServicesSection() {
                     href={`https://wa.me/5493434653628?text=${encodeURIComponent(service.whatsappMessage)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className={`inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-medium ${
-                      service.popular
-                        ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                    }`}
+                    className={`inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-medium transition-all duration-200 ${
+  selectedService === service.id || service.popular
+    ? "bg-accent text-accent-foreground hover:bg-accent/90 scale-[1.02]"
+    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+}`}
                   >
                     Escribirme por WhatsApp
                     <ArrowRight className="ml-2 h-4 w-4" />
