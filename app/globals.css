@@ -119,21 +119,23 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
-.marquee {
+
+.results-marquee {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 28s linear infinite;
+  animation: results-marquee-scroll 38s linear infinite;
 }
 
-.marquee:hover {
+.results-marquee:hover {
   animation-play-state: paused;
 }
 
-@keyframes marquee-scroll {
+@keyframes results-marquee-scroll {
   0% {
     transform: translateX(0);
   }
