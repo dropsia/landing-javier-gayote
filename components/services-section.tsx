@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { GraduationCap, Store, Rocket, Check, ArrowRight } from "lucide-react"
+import { GraduationCap, Store, Rocket, Check, ArrowRight, Wrench } from "lucide-react"
 
 const services = [
   {
@@ -11,18 +11,18 @@ const services = [
     icon: GraduationCap,
     title: "Mentoría Ecommerce Pro",
     price: "USD 500 / USD 1000",
-    description: "Formación personalizada para dominar Amazon FBA y eBay Dropshipping",
+    description: "Formación personalizada para Amazon FBA o eBay Dropshipping, según la plataforma que elijas.",
     subtitle: "La mayoría comienza aquí",
     features: [
-      "Amazon FBA + eBay Dropshipping",
+      "Amazon FBA o eBay Dropshipping",
       "IA aplicada al ecommerce",
       "Plantillas Excel profesionales",
       "Calculadora personalizada",
     ],
     popular: true,
     bonuses: [
-      { plan: "Plan Base (USD 500)", content: "Curso completo de eBay Dropshipping" },
-      { plan: "Plan Intensivo (USD 1000)", content: "Curso completo de Amazon FBA + eBay Dropshipping" },
+      { plan: "Plan Base (USD 500)", content: "Curso completo de la plataforma elegida" },
+      { plan: "Plan Intensivo (USD 1000)", content: "Más acompañamiento + curso completo de la plataforma elegida" },
     ],
   },
   {
@@ -30,7 +30,7 @@ const services = [
     icon: Store,
     title: "Gestión eBay Dropshipping",
     price: "USD 2500",
-    description: "Servicio completo de gestión para tu tienda de dropshipping",
+    description: "Delegación completa de la operación con foco en métricas, estabilidad y crecimiento sano de la cuenta.",
     subtitle: null,
     features: [
       "Listings optimizados",
@@ -47,7 +47,7 @@ const services = [
     icon: Rocket,
     title: "Amazon FBA Llave en Mano",
     price: "USD 5000",
-    description: "Lanzamos tu producto en Amazon de principio a fin",
+    description: "Desarrollo completo del producto desde cero, con estructura real para vender y escalar.",
     subtitle: null,
     features: [
       "Producto rentable validado",
@@ -77,10 +77,10 @@ export function ServicesSection() {
         <div className="text-center mb-16">
           <span className="text-sm font-medium text-accent uppercase tracking-wider">Servicios</span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mt-4 text-balance">
-            Elige el plan que mejor se adapte a ti
+            Elegí el servicio que mejor se adapte a tu momento
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Haz click en un servicio para seleccionarlo antes de escribir.
+            Seleccioná una opción para avanzar por WhatsApp con el servicio correcto.
           </p>
         </div>
 
@@ -167,13 +167,79 @@ export function ServicesSection() {
                           : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                     }`}
                   >
-                    Escribir por WhatsApp
+                    Escribirme por WhatsApp
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </CardContent>
               </Card>
             )
           })}
+        </div>
+
+        {/* Servicio a medida */}
+        <div className="mt-10 max-w-3xl mx-auto">
+          <Card
+            onClick={() => handleSelect("medida", "Servicio a medida")}
+            className={`relative cursor-pointer bg-card transition-all duration-300 ${
+              selectedService === "medida"
+                ? "border-accent ring-2 ring-accent/30 shadow-lg shadow-accent/10"
+                : "border-border hover:border-accent/30"
+            }`}
+          >
+            {selectedService === "medida" && (
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="px-3 py-1 text-xs font-medium bg-blue-600 text-white rounded-full">
+                  Seleccionado
+                </span>
+              </div>
+            )}
+
+            <CardHeader className="pb-4 text-center">
+              <div className="p-3 rounded-xl bg-secondary w-fit mb-4 mx-auto">
+                <Wrench className="h-6 w-6 text-accent" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground">Servicio a medida</h3>
+              <p className="text-muted-foreground text-sm mt-2">
+                Para auditorías, desbloqueos, revisión de PPC, optimización de listings o necesidades específicas.
+              </p>
+            </CardHeader>
+
+            <CardContent className="text-center">
+              <div className="mb-6">
+                <span className="text-3xl font-bold text-foreground">Cotización personalizada</span>
+              </div>
+
+              <ul className="space-y-3 mb-6 text-left max-w-md mx-auto">
+                {[
+                  "Análisis del caso",
+                  "Diagnóstico claro",
+                  "Solución puntual",
+                  "Plan de acción o implementación",
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <Check className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleSelect("medida", "Servicio a medida")
+                  document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
+                }}
+                className={`rounded-full px-8 ${
+                  selectedService === "medida"
+                    ? "bg-blue-600 text-white hover:bg-blue-700"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                }`}
+              >
+                Escribirme por WhatsApp
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
