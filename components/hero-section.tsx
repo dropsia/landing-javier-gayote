@@ -42,7 +42,7 @@ export function HeroSection() {
             size="lg"
             className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-medium rounded-full shadow-lg shadow-primary/25"
           >
-            <Link href="#contactar">
+            <a href="#contactar">
               Agenda un diagnóstico estratégico
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
