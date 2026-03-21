@@ -76,10 +76,6 @@ const services = [
 export function ServicesSection() {
   const [selectedService, setSelectedService] = useState<string>("mentoria")
 
-  const selectService = (id: string) => {
-    setSelectedService(id)
-  }
-
   const getCardClasses = (id: string, popular?: boolean) => {
     const isSelected = selectedService === id
 
@@ -104,12 +100,6 @@ export function ServicesSection() {
     return "bg-secondary text-secondary-foreground hover:bg-secondary/80"
   }
 
-  const getTopAreaClasses = (isSelected: boolean) => {
-    return `block w-full rounded-t-2xl text-left select-none ${
-      isSelected ? "bg-accent/5" : ""
-    }`
-  }
-
   return (
     <section id="servicios" className="py-24 px-4 border-t border-border">
       <div className="max-w-6xl mx-auto">
@@ -121,7 +111,7 @@ export function ServicesSection() {
             Elegí el servicio que mejor se adapte a tu momento
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Selecciona una opción y luego escríbeme directo por WhatsApp.
+            Toca una tarjeta para seleccionarla y luego escríbeme por WhatsApp.
           </p>
         </div>
 
@@ -132,44 +122,23 @@ export function ServicesSection() {
             return (
               <Card
                 key={service.id}
-                className={`relative bg-card transition-all duration-300 ease-out overflow-hidden ${getCardClasses(
+                className={`relative overflow-hidden bg-card transition-all duration-300 ease-out ${getCardClasses(
                   service.id,
                   service.popular
                 )}`}
               >
                 {service.popular && (
-                  <div className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <span className="px-3 py-1 text-xs font-medium bg-accent text-accent-foreground rounded-full">
+                  <div className="pointer-events-none absolute -top-3 left-1/2 z-20 -translate-x-1/2">
+                    <span className="rounded-full bg-accent px-3 py-1 text-xs font-medium text-accent-foreground">
                       Más popular
                     </span>
                   </div>
                 )}
 
-                <div
-                  role="button"
-                  tabIndex={0}
-                  aria-pressed={isSelected}
-                  onClick={() => selectService(service.id)}
-                  onPointerUp={(e) => {
-                    if (e.pointerType === "touch") {
-                      selectService(service.id)
-                    }
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault()
-                      selectService(service.id)
-                    }
-                  }}
-                  className={getTopAreaClasses(isSelected)}
-                  style={{
-                    WebkitTapHighlightColor: "transparent",
-                    touchAction: "manipulation",
-                  }}
-                >
+                <div className="relative z-10">
                   <CardHeader className="pb-4">
                     <div
-                      className={`p-3 rounded-xl w-fit mb-4 transition-all duration-300 ${
+                      className={`mb-4 w-fit rounded-xl p-3 transition-all duration-300 ${
                         isSelected ? "bg-accent/10 scale-105" : "bg-secondary"
                       }`}
                     >
@@ -179,29 +148,29 @@ export function ServicesSection() {
                     <h3 className="text-xl font-bold text-foreground">{service.title}</h3>
 
                     {service.subtitle && (
-                      <p className="text-xs font-medium text-accent mt-1">{service.subtitle}</p>
+                      <p className="mt-1 text-xs font-medium text-accent">{service.subtitle}</p>
                     )}
 
-                    <p className="text-muted-foreground text-sm mt-2">{service.description}</p>
+                    <p className="mt-2 text-sm text-muted-foreground">{service.description}</p>
                   </CardHeader>
 
-                  <CardContent className="pb-4">
+                  <CardContent>
                     <div className="mb-6">
                       <span className="text-3xl font-bold text-foreground">{service.price}</span>
                     </div>
 
-                    <ul className="space-y-3 mb-6">
+                    <ul className="mb-6 space-y-3">
                       {service.features.map((feature, j) => (
                         <li key={j} className="flex items-start gap-3">
-                          <Check className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                          <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
                           <span className="text-sm text-muted-foreground">{feature}</span>
                         </li>
                       ))}
                     </ul>
 
                     {service.bonuses && (
-                      <div className="mb-2 pt-4 border-t border-border">
-                        <p className="text-xs font-semibold text-foreground mb-3">
+                      <div className="mb-6 border-t border-border pt-4">
+                        <p className="mb-3 text-xs font-semibold text-foreground">
                           Bonos incluidos:
                         </p>
                         <ul className="space-y-2">
@@ -214,65 +183,52 @@ export function ServicesSection() {
                         </ul>
                       </div>
                     )}
+
+                    <a
+                      href={`https://wa.me/5493434653628?text=${encodeURIComponent(
+                        service.whatsappMessage
+                      )}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`relative z-30 inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-medium transition-all duration-300 ${getButtonClasses(
+                        service.id,
+                        service.popular
+                      )}`}
+                    >
+                      Escribirme por WhatsApp
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </a>
                   </CardContent>
                 </div>
 
-                <div className="px-6 pb-6">
-                  <a
-                    href={`https://wa.me/5493434653628?text=${encodeURIComponent(
-                      service.whatsappMessage
-                    )}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    onPointerUp={(e) => e.stopPropagation()}
-                    onTouchEnd={(e) => e.stopPropagation()}
-                    className={`inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-medium transition-all duration-300 ${getButtonClasses(
-                      service.id,
-                      service.popular
-                    )}`}
-                  >
-                    Escribirme por WhatsApp
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </div>
+                <button
+                  type="button"
+                  aria-label={`Seleccionar ${service.title}`}
+                  aria-pressed={isSelected}
+                  onClick={() => setSelectedService(service.id)}
+                  className="absolute inset-x-0 top-0 bottom-20 z-20 rounded-[inherit]"
+                  style={{
+                    WebkitTapHighlightColor: "transparent",
+                    touchAction: "manipulation",
+                    background: "transparent",
+                  }}
+                />
               </Card>
             )
           })}
         </div>
 
-        <div className="mt-10 max-w-3xl mx-auto">
+        <div className="mx-auto mt-10 max-w-3xl">
           <Card
-            className={`relative bg-card transition-all duration-300 ease-out overflow-hidden ${getCardClasses(
+            className={`relative overflow-hidden bg-card transition-all duration-300 ease-out ${getCardClasses(
               "custom",
               false
             )}`}
           >
-            <div
-              role="button"
-              tabIndex={0}
-              aria-pressed={selectedService === "custom"}
-              onClick={() => selectService("custom")}
-              onPointerUp={(e) => {
-                if (e.pointerType === "touch") {
-                  selectService("custom")
-                }
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault()
-                  selectService("custom")
-                }
-              }}
-              className={getTopAreaClasses(selectedService === "custom")}
-              style={{
-                WebkitTapHighlightColor: "transparent",
-                touchAction: "manipulation",
-              }}
-            >
+            <div className="relative z-10">
               <CardHeader className="pb-4 text-center">
                 <div
-                  className={`p-3 rounded-xl w-fit mb-4 mx-auto transition-all duration-300 ${
+                  className={`mx-auto mb-4 w-fit rounded-xl p-3 transition-all duration-300 ${
                     selectedService === "custom" ? "bg-accent/10 scale-105" : "bg-secondary"
                   }`}
                 >
@@ -281,20 +237,20 @@ export function ServicesSection() {
 
                 <h3 className="text-xl font-bold text-foreground">Servicio a medida</h3>
 
-                <p className="text-muted-foreground text-sm mt-2">
+                <p className="mt-2 text-sm text-muted-foreground">
                   Para auditorías, desbloqueos, revisión de PPC, optimización de listings o
                   necesidades específicas.
                 </p>
               </CardHeader>
 
-              <CardContent className="text-center pb-4">
+              <CardContent className="text-center">
                 <div className="mb-6">
                   <span className="text-3xl font-bold text-foreground">
                     Cotización personalizada
                   </span>
                 </div>
 
-                <ul className="space-y-3 mb-2 text-left max-w-md mx-auto">
+                <ul className="mx-auto mb-6 max-w-md space-y-3 text-left">
                   {[
                     "Análisis del caso",
                     "Diagnóstico claro",
@@ -302,33 +258,41 @@ export function ServicesSection() {
                     "Plan de acción o implementación",
                   ].map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Check className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
                       <span className="text-sm text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
+
+                <a
+                  href={`https://wa.me/5493434653628?text=${encodeURIComponent(
+                    "Hola Javier, vi tu página y quiero que me expliques cómo trabajar mi caso con Servicio a medida."
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`relative z-30 inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium transition-all duration-300 ${getButtonClasses(
+                    "custom",
+                    false
+                  )}`}
+                >
+                  Escribirme por WhatsApp
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
               </CardContent>
             </div>
 
-            <div className="px-6 pb-6 text-center">
-              <a
-                href={`https://wa.me/5493434653628?text=${encodeURIComponent(
-                  "Hola Javier, vi tu página y quiero que me expliques cómo trabajar mi caso con Servicio a medida."
-                )}`}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                onPointerUp={(e) => e.stopPropagation()}
-                onTouchEnd={(e) => e.stopPropagation()}
-                className={`inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-medium transition-all duration-300 ${getButtonClasses(
-                  "custom",
-                  false
-                )}`}
-              >
-                Escribirme por WhatsApp
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </div>
+            <button
+              type="button"
+              aria-label="Seleccionar Servicio a medida"
+              aria-pressed={selectedService === "custom"}
+              onClick={() => setSelectedService("custom")}
+              className="absolute inset-x-0 top-0 bottom-20 z-20 rounded-[inherit]"
+              style={{
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "manipulation",
+                background: "transparent",
+              }}
+            />
           </Card>
         </div>
       </div>
