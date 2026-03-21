@@ -8,17 +8,22 @@ export function CtaSection() {
   const [selectedService, setSelectedService] = useState("")
 
   useEffect(() => {
-    const stored = localStorage.getItem("selectedService")
-    if (stored) {
+    const updateSelectedService = () => {
+      const stored = localStorage.getItem("selectedService") || ""
       setSelectedService(stored)
+    }
+
+    updateSelectedService()
+    window.addEventListener("serviceSelected", updateSelectedService)
+
+    return () => {
+      window.removeEventListener("serviceSelected", updateSelectedService)
     }
   }, [])
 
   const message = useMemo(() => {
     const serviceText = selectedService || "el servicio que mejor se adapte a mi negocio"
-    return encodeURIComponent(
-      `Hola Javier, quiero información sobre ${serviceText}.`
-    )
+    return encodeURIComponent(`Hola Javier, quiero información sobre ${serviceText}.`)
   }, [selectedService])
 
   return (
