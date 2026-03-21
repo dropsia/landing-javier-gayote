@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
@@ -14,6 +14,13 @@ export function CtaSection() {
     }
   }, [])
 
+  const message = useMemo(() => {
+    const serviceText = selectedService || "el servicio que mejor se adapte a mi negocio"
+    return encodeURIComponent(
+      `Hola Javier, quiero información sobre ${serviceText}.`
+    )
+  }, [selectedService])
+
   return (
     <section id="contactar" className="py-24 px-4 bg-card border-t border-border relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:64px_64px]" />
@@ -26,7 +33,7 @@ export function CtaSection() {
         </h2>
 
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
-          Agenda una llamada de diagnóstico gratuita y descubre cómo podemos ayudarte a escalar tu negocio.
+          Escríbeme por WhatsApp y vemos si tu negocio tiene potencial real de mejora.
         </p>
 
         {selectedService && (
@@ -35,18 +42,22 @@ export function CtaSection() {
           </p>
         )}
 
-        <a href={`https://wa.me/5493434653628?text=Hola%20Javier,%20quiero%20agendar%20una%20llamada%20para%20el%20servicio:%20${selectedService}`}>
+        <a
+          href={`https://wa.me/5493434653628?text=${message}`}
+          target="_blank"
+          rel="noreferrer"
+        >
           <Button
             size="lg"
             className="bg-accent text-accent-foreground hover:bg-accent/90 px-10 py-7 text-lg font-medium rounded-full"
           >
-            Agendar llamada
+            Hablar por WhatsApp
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </a>
 
         <p className="text-sm text-muted-foreground mt-6">
-          Sin compromiso. 100% confidencial.
+          Respuesta directa. Sin compromiso.
         </p>
       </div>
     </section>
