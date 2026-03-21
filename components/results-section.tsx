@@ -102,7 +102,7 @@ export function ResultsSection() {
               {loopedImages.map((item, index) => (
                 <div
                   key={`${item.src}-${index}`}
-                  className="relative w-[280px] flex-shrink-0 overflow-hidden rounded-2xl border border-border bg-card shadow-md sm:w-[380px]"
+                  className="relative w-[280px] flex-shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-card/80 shadow-[0_10px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.25)] sm:w-[420px]"
                 >
                   <div className="absolute left-3 top-3 z-10 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
                     {item.label}
@@ -111,7 +111,7 @@ export function ResultsSection() {
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className="h-auto w-full object-cover"
+                    className="h-[420px] w-full object-cover object-top"
                     draggable={false}
                   />
                 </div>
