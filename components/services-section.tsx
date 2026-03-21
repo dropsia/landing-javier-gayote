@@ -85,8 +85,10 @@ export function ServicesSection() {
             return (
               <Card
                 key={service.id}
-                onClick={() => setSelectedService(service.id)}
-                className={`relative cursor-pointer bg-card transition-all duration-300 ${
+onClick={() => {
+  setSelectedService(service.id)
+  localStorage.setItem("selectedService", service.title)
+}}                className={`relative cursor-pointer bg-card transition-all duration-300 ${
                   isSelected
                     ? "border-accent ring-2 ring-accent/30 shadow-lg shadow-accent/10"
                     : "border-border hover:border-accent/30"
