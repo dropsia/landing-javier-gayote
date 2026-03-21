@@ -91,8 +91,7 @@ export function ServicesSection() {
             return (
               <Card
                 key={service.id}
-                onClick={() => handleSelect(service.id, service.title)}
-                className={`relative cursor-pointer bg-card transition-all duration-300 ${
+                className={`relative bg-card transition-all duration-300 ${
                   isSelected
                     ? "border-accent ring-2 ring-accent/30 shadow-lg shadow-accent/10"
                     : "border-border hover:border-accent/30"
@@ -153,34 +152,45 @@ export function ServicesSection() {
                     </div>
                   )}
 
-                  <Button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      handleSelect(service.id, service.title)
-                      document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
-                    }}
-                    className={`w-full rounded-full ${
-                      isSelected
-                        ? "bg-blue-600 text-white hover:bg-blue-700"
-                        : service.popular
-                          ? "bg-accent text-accent-foreground hover:bg-accent/90"
-                          : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                    }`}
-                  >
-                    Escribirme por WhatsApp
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <div className="flex flex-col gap-3">
+                    <Button
+                      type="button"
+                      onClick={() => handleSelect(service.id, service.title)}
+                      variant="outline"
+                      className={`w-full rounded-full ${
+                        isSelected ? "border-blue-600 text-blue-600" : ""
+                      }`}
+                    >
+                      {isSelected ? "Servicio seleccionado" : "Seleccionar servicio"}
+                    </Button>
+
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        handleSelect(service.id, service.title)
+                        document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
+                      }}
+                      className={`w-full rounded-full ${
+                        isSelected
+                          ? "bg-blue-600 text-white hover:bg-blue-700"
+                          : service.popular
+                            ? "bg-accent text-accent-foreground hover:bg-accent/90"
+                            : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                      }`}
+                    >
+                      Escribirme por WhatsApp
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             )
           })}
         </div>
 
-        {/* Servicio a medida */}
         <div className="mt-10 max-w-3xl mx-auto">
           <Card
-            onClick={() => handleSelect("medida", "Servicio a medida")}
-            className={`relative cursor-pointer bg-card transition-all duration-300 ${
+            className={`relative bg-card transition-all duration-300 ${
               selectedService === "medida"
                 ? "border-accent ring-2 ring-accent/30 shadow-lg shadow-accent/10"
                 : "border-border hover:border-accent/30"
@@ -223,21 +233,34 @@ export function ServicesSection() {
                 ))}
               </ul>
 
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleSelect("medida", "Servicio a medida")
-                  document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
-                }}
-                className={`rounded-full px-8 ${
-                  selectedService === "medida"
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                }`}
-              >
-                Escribirme por WhatsApp
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <div className="flex flex-col gap-3 max-w-md mx-auto">
+                <Button
+                  type="button"
+                  onClick={() => handleSelect("medida", "Servicio a medida")}
+                  variant="outline"
+                  className={`w-full rounded-full ${
+                    selectedService === "medida" ? "border-blue-600 text-blue-600" : ""
+                  }`}
+                >
+                  {selectedService === "medida" ? "Servicio seleccionado" : "Seleccionar servicio"}
+                </Button>
+
+                <Button
+                  type="button"
+                  onClick={() => {
+                    handleSelect("medida", "Servicio a medida")
+                    document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                  className={`w-full rounded-full ${
+                    selectedService === "medida"
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  Escribirme por WhatsApp
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
