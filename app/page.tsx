@@ -4,6 +4,7 @@ import { ProblemSection } from "@/components/problem-section"
 import { SolutionSection } from "@/components/solution-section"
 import { ServicesSection } from "@/components/services-section"
 import { ResultsSection } from "@/components/results-section"
+import { ProcessSection } from "@/components/process-section"
 
 export default function HomePage() {
   return (
@@ -14,6 +15,7 @@ export default function HomePage() {
       <SolutionSection />
       <ServicesSection />
       <ResultsSection />
+      <ProcessSection />
     </main>
   )
 }
