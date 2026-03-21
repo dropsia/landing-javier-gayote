@@ -98,7 +98,7 @@ export function ResultsSection() {
             <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-gradient-to-r from-background to-transparent" />
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-gradient-to-l from-background to-transparent" />
 
-            <div className="results-marquee flex gap-5">
+            <div className="results-marquee flex gap-5 will-change-transform">
               {loopedImages.map((item, index) => (
                 <div
                   key={`${item.src}-${index}`}
