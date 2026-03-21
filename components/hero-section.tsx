@@ -9,9 +9,9 @@ export function HeroSection() {
       id="inicio"
       className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-20 overflow-hidden"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:64px_64px]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:64px_64px]" />
 
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm mb-8">
@@ -34,19 +34,18 @@ export function HeroSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button
-            size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-medium rounded-full shadow-lg shadow-primary/25"
-            onClick={() => {
-              document.getElementById("contactar")?.scrollIntoView({ behavior: "smooth" })
-            }}
-          >
-            Agenda un diagnóstico estratégico
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <a href="#contactar">
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base font-medium rounded-full shadow-lg shadow-primary/25"
+            >
+              Agenda un diagnóstico estratégico
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </a>
 
           <a
-            href="https://wa.me/5493434653628?text=Hola%20Javier,%20quiero%20informaci%C3%B3n%20sobre%20tus%20servicios"
+            href="https://wa.me/5493434653628?text=Hola%20Javier,%20vi%20tu%20p%C3%A1gina%20y%20quiero%20que%20me%20expliques%20c%C3%B3mo%20trabajar%20mi%20caso"
             target="_blank"
             rel="noreferrer"
           >
