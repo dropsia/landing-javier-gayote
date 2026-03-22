@@ -1,31 +1,11 @@
 "use client"
 
 const resultsImages = [
-  {
-    src: "/results/result-1.jpg",
-    alt: "Captura real de cuenta ecommerce 1",
-    label: "Amazon FBA",
-  },
-  {
-    src: "/results/result-2.jpg",
-    alt: "Captura real de cuenta ecommerce 2",
-    label: "eBay",
-  },
-  {
-    src: "/results/result-3.jpg",
-    alt: "Captura real de cuenta ecommerce 3",
-    label: "PPC",
-  },
-  {
-    src: "/results/result-4.jpg",
-    alt: "Captura real de cuenta ecommerce 4",
-    label: "Optimización",
-  },
-  {
-    src: "/results/result-5.jpg",
-    alt: "Captura real de cuenta ecommerce 5",
-    label: "Escalado",
-  },
+  { src: "/results/result-1.jpg", alt: "Captura real de cuenta ecommerce 1" },
+  { src: "/results/result-2.jpg", alt: "Captura real de cuenta ecommerce 2" },
+  { src: "/results/result-3.jpg", alt: "Captura real de cuenta ecommerce 3" },
+  { src: "/results/result-4.jpg", alt: "Captura real de cuenta ecommerce 4" },
+  { src: "/results/result-5.jpg", alt: "Captura real de cuenta ecommerce 5" },
 ]
 
 const loopedImages = [...resultsImages, ...resultsImages]
@@ -56,7 +36,8 @@ export function ResultsSection() {
             Datos, métricas y resultados reales
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Trabajo con estructura, optimización y decisiones basadas en datos para generar mejoras reales en cuentas y operaciones ecommerce.
+            Trabajo con estructura, optimización y decisiones basadas en datos para generar
+            mejoras reales en cuentas y operaciones ecommerce.
           </p>
         </div>
 
@@ -89,9 +70,6 @@ export function ResultsSection() {
             <h3 className="text-2xl font-bold text-foreground">
               Capturas reales de cuentas trabajadas
             </h3>
-            <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground sm:text-base">
-              Sin exponer identidades ni información sensible. Solo resultados, operación y métricas reales.
-            </p>
           </div>
 
           <div className="relative overflow-hidden">
@@ -102,16 +80,12 @@ export function ResultsSection() {
               {loopedImages.map((item, index) => (
                 <div
                   key={`${item.src}-${index}`}
-                  className="relative w-[280px] flex-shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-card/80 shadow-[0_10px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.25)] sm:w-[420px]"
+                  className="relative w-[280px] flex-shrink-0 overflow-hidden rounded-3xl border border-white/10 bg-card/80 shadow-[0_10px_40px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:w-[420px]"
                 >
-                  <div className="absolute left-3 top-3 z-10 rounded-full bg-black/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                    {item.label}
-                  </div>
-
                   <img
                     src={item.src}
                     alt={item.alt}
-                    className="h-[420px] w-full object-cover object-top"
+                    className="h-[260px] w-full bg-card object-contain"
                     draggable={false}
                   />
                 </div>
