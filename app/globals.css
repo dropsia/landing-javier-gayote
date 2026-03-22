@@ -131,6 +131,12 @@
   animation: results-marquee-scroll 38s linear infinite;
 }
 
+.results-marquee {
+  display: flex;
+  width: max-content;
+  animation: results-marquee-scroll 38s linear infinite;
+}
+
 .results-marquee:hover {
   animation-play-state: paused;
 }
