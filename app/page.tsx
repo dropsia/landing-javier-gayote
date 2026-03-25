@@ -7,6 +7,7 @@ import { ResultsSection } from "@/components/results-section"
 import { ProcessSection } from "@/components/process-section"
 import { CtaSection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
+import { DownloadSection } from "@/components/download-section"
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
       <section id="inicio">
         <HeroSection />
       </section>
+      <DownloadSection />
       <section id="problema">
         <ProblemSection />
       </section>
